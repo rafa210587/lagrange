@@ -6,6 +6,20 @@ O Lagrange é um assistente de IA para Windows que trabalha nos seus projetos: l
 
 Este repositório guarda só o instalador e as versões publicadas. O código-fonte é privado.
 
+![O Lagrange corrigindo um bug: o pedido, a causa encontrada, o arquivo editado e um subagente revisando os testes](docs/conversa.png)
+
+| Nada com efeito acontece sem você aprovar | Subagentes trabalham em paralelo, e você acompanha cada um |
+|---|---|
+| ![Cartão pedindo aprovação para rodar npm test, com as opções aprovar uma vez, sempre permitir este comando ou rejeitar](docs/aprovacao.png) | ![Painel lateral com a tarefa, o raciocínio e os arquivos lidos por um subagente](docs/subagentes.png) |
+
+<details><summary>Tema escuro</summary>
+
+![A mesma conversa no tema escuro](docs/conversa-escuro.png)
+
+</details>
+
+As imagens são de um projeto de demonstração e são geradas a cada versão, a partir da própria interface publicada.
+
 ## O que ele faz hoje
 
 - **Projetos de verdade.** Cada projeto (uma pasta, com ou sem Git) tem as suas conversas, memória, regras e consumo. Há também conversas pessoais, fora de qualquer projeto.
@@ -105,7 +119,7 @@ Abra uma pasta confiável e clique no ícone **ℒ** na barra lateral (ou **Ctrl
 
 - Windows 11, 64 bits (x64). O Windows 10 deve funcionar, mas ainda não foi validado.
 - **Disco:** cerca de 700 MB (uns 450 MB se você já tiver o PowerShell 7); cada atualização guarda mais uns 60 MB, porque a versão anterior fica ao lado.
-- **Memória:** cada projeto aberto usa de 1 a 1,5 GB. Recomendado: 16 GB de RAM; com 8 GB, prefira um projeto aberto por vez.
+- **Memória:** cada projeto aberto usa cerca de 1 GB. No máximo três ficam ligados ao mesmo tempo: ao abrir um quarto, o que você usou há mais tempo é suspenso (a não ser que esteja trabalhando) e volta sozinho quando você retorna a ele; um projeto parado por 30 minutos também é suspenso. Recomendado: 16 GB de RAM.
 - **Idioma:** a interface é em português.
 - Internet durante a instalação e para conversar com o modelo.
 - Uma chave de API de um provedor de modelo (veja [Como usar](#como-usar)).
