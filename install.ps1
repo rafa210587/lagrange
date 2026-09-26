@@ -3,7 +3,8 @@
 # Lagrange installer for Windows, for a terminal. Run in PowerShell (Windows PowerShell 5.1 or 7):
 #   irm https://raw.githubusercontent.com/rafa210587/lagrange/main/install.ps1 | iex
 # It downloads LagrangeSetup.exe from the latest release, checks its SHA-256 and runs it: the same
-# per-user installer as the download link, with its window showing the progress. Run it again to update.
+# per-user installer as the download link, whose window asks what to install. Run it again to update.
+# Unattended: $env:LAGRANGE_COMPONENTS = 'app,terminal,vscode' (any of them) installs those without asking.
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
@@ -19,9 +20,10 @@ try {
     $expected = ((Get-Content -LiteralPath "$setup.sha256" -Raw).Trim() -split '\s+')[0]
     $actual = (Get-FileHash -LiteralPath $setup -Algorithm SHA256).Hash
     if ($actual -ne $expected) { throw "O instalador baixado não confere com o SHA-256 publicado ($actual, esperado $expected)." }
-    $process = Start-Process -FilePath $setup -ArgumentList '--auto' -PassThru -Wait
+    $arguments = if ($env:LAGRANGE_COMPONENTS) { @('--auto', '--components', $env:LAGRANGE_COMPONENTS) } else { @() }
+    $process = if ($arguments) { Start-Process -FilePath $setup -ArgumentList $arguments -PassThru -Wait } else { Start-Process -FilePath $setup -PassThru -Wait }
     if ($process.ExitCode -ne 0) { throw "A instalação não terminou; o registro está em $([IO.Path]::GetTempPath())lagrange-setup.log" }
-    Write-Host 'Lagrange instalado. Abra pelo Menu Iniciar ou digite lagrange num terminal novo.'
+    Write-Host 'Lagrange instalado.'
 }
 finally {
     Remove-Item -LiteralPath $work -Recurse -Force -ErrorAction SilentlyContinue
