@@ -38,7 +38,7 @@ As imagens são de um projeto de demonstração e são geradas a cada versão, a
 - **Memória e skills.** O que ele aprende sobre o projeto vira memória que você confirma, exporta e importa; skills estendem o que ele sabe fazer.
 - **Automações agendadas**, com limite de duração e, quando o preço do modelo é conhecido, orçamento definido na criação. Elas leem o projeto, mas não o alteram nem rodam comandos.
 - **Custo.** Consumo de tokens e custo por conversa, por modelo e por projeto. O **Limite de custo** do projeto (em **Configurações**) barra a chamada antes de ela acontecer; vem vazio, ou seja, sem teto de gasto até você definir um.
-- **Modo plano e imagens** por conversa, **esforço de raciocínio** por projeto, e avisos na área de trabalho quando algo pede a sua atenção com o app em segundo plano.
+- **Modo plano e imagens** por conversa, **esforço de raciocínio** para todos os projetos (escolhido embaixo da caixa de mensagem), e avisos na área de trabalho quando algo pede a sua atenção com o app em segundo plano.
 
 ## Instalar
 
