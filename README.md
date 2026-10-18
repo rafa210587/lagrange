@@ -142,7 +142,9 @@ Antes, feche cada projeto aberto em **Arquivo → Fechar projeto**. Fechar a jan
 
 ## Desinstalar no Windows
 
-Ainda não há desinstalador. Para remover tudo, feche cada projeto em **Arquivo → Fechar projeto** e:
+**Desinstalador implementado, ainda não publicado.** Nas versões que o incluírem, a remoção estará em **Configurações → Aplicativos → Aplicativos instalados → Lagrange → Desinstalar**, preservando conversas, chaves, configurações, projetos e worktrees. Runtimes, cache e a extensão do VS Code também são mantidos. Tarefas em andamento são aguardadas por até 20 minutos; workspaces ou comandos ainda abertos e recuperação pendente bloqueiam a remoção. Não há opção de apagar dados.
+
+A versão publicada ainda não contém esse desinstalador. Para remover tudo manualmente, feche cada projeto em **Arquivo → Fechar projeto** e:
 
 1. Apague as pastas `%LOCALAPPDATA%\HarnessAI` e `%LOCALAPPDATA%\HarnessAI-Workspaces`. A segunda guarda os projetos criados pelo app, as conversas pessoais e as worktrees das conversas. Isso apaga também conversas, chaves e configurações.
 2. Apague o atalho **Lagrange** no Menu Iniciar (e na barra de tarefas ou na área de trabalho, se você o fixou).
@@ -190,7 +192,7 @@ O que sai dela:
 - Só Windows x64 (validado no Windows 11); não há versão para macOS nem Linux.
 - O controle visual (ver a tela, clicar, digitar) foi validado no navegador, no Blender e no Unity preparados pelo app.
 - Entre os provedores, só o DeepSeek foi validado em uso real.
-- O instalador ainda não é assinado, e não há desinstalador.
+- A versão publicada ainda não tem desinstalador nem assinatura digital.
 - Cada projeto aberto mantém o seu próprio motor na memória.
 - Erros do provedor (chave inválida, limite de uso) aparecem com a mensagem original dele, em inglês.
 
