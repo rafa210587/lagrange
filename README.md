@@ -138,11 +138,11 @@ A instalação só baixa arquivos; nenhum dado seu é enviado. Se algo falhar, o
 
 ## Atualizar no Windows
 
-Antes, encerre cada projeto aberto em **… → Encerrar workspace**. Fechar a janela não basta: o projeto continua ligado em segundo plano por até 30 minutos. Depois rode o instalador de novo. A versão nova fica ao lado da anterior; projetos, conversas, chaves e configurações são mantidos. Se uma conversa estiver respondendo, a versão anterior só fecha quando ela terminar.
+Antes, feche cada projeto aberto em **Arquivo → Fechar projeto**. Fechar a janela não basta: o projeto continua ligado em segundo plano por até 30 minutos. Depois rode o instalador de novo. A versão nova fica ao lado da anterior; projetos, conversas, chaves e configurações são mantidos. Se uma conversa estiver respondendo, a versão anterior só fecha quando ela terminar.
 
 ## Desinstalar no Windows
 
-Ainda não há desinstalador. Para remover tudo, feche o Lagrange (**… → Encerrar workspace** em cada projeto) e:
+Ainda não há desinstalador. Para remover tudo, feche cada projeto em **Arquivo → Fechar projeto** e:
 
 1. Apague as pastas `%LOCALAPPDATA%\HarnessAI` e `%LOCALAPPDATA%\HarnessAI-Workspaces`. A segunda guarda os projetos criados pelo app, as conversas pessoais e as worktrees das conversas. Isso apaga também conversas, chaves e configurações.
 2. Apague o atalho **Lagrange** no Menu Iniciar (e na barra de tarefas ou na área de trabalho, se você o fixou).
