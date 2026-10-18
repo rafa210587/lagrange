@@ -142,7 +142,7 @@ Antes, feche cada projeto aberto em **Arquivo → Fechar projeto**. Fechar a jan
 
 ## Desinstalar no Windows
 
-**Desinstalador em preparação:** a próxima versão terá remoção por **Configurações → Aplicativos → Aplicativos instalados → Lagrange → Desinstalar**, preservando conversas, chaves, configurações, projetos e worktrees. Runtimes, cache e a extensão do VS Code também são mantidos. Tarefas em andamento são aguardadas por até 20 minutos; workspaces ou comandos ainda abertos e recuperação pendente bloqueiam a remoção. Não há opção de apagar dados.
+**Desinstalador implementado, ainda não publicado.** Nas versões que o incluírem, a remoção estará em **Configurações → Aplicativos → Aplicativos instalados → Lagrange → Desinstalar**, preservando conversas, chaves, configurações, projetos e worktrees. Runtimes, cache e a extensão do VS Code também são mantidos. Tarefas em andamento são aguardadas por até 20 minutos; workspaces ou comandos ainda abertos e recuperação pendente bloqueiam a remoção. Não há opção de apagar dados.
 
 A versão publicada ainda não contém esse desinstalador. Para remover tudo manualmente, feche cada projeto em **Arquivo → Fechar projeto** e:
 
