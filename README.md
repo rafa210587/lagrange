@@ -142,7 +142,7 @@ Antes, feche cada projeto aberto em **Arquivo → Fechar projeto**. Fechar a jan
 
 ## Desinstalar no Windows
 
-**Desinstalador em preparação:** o [PR #293](https://github.com/rafa210587/harness-ai/pull/293) adiciona a remoção por **Configurações → Aplicativos → Aplicativos instalados → Lagrange → Desinstalar**, preservando conversas, chaves, configurações, projetos e worktrees. Runtimes, cache e a extensão do VS Code também são mantidos. Tarefas em andamento são aguardadas por até 20 minutos; workspaces ou comandos ainda abertos e recuperação pendente bloqueiam a remoção. Não há opção de apagar dados.
+**Desinstalador em preparação:** a próxima versão terá remoção por **Configurações → Aplicativos → Aplicativos instalados → Lagrange → Desinstalar**, preservando conversas, chaves, configurações, projetos e worktrees. Runtimes, cache e a extensão do VS Code também são mantidos. Tarefas em andamento são aguardadas por até 20 minutos; workspaces ou comandos ainda abertos e recuperação pendente bloqueiam a remoção. Não há opção de apagar dados.
 
 A versão publicada ainda não contém esse desinstalador. Para remover tudo manualmente, feche cada projeto em **Arquivo → Fechar projeto** e:
 
