@@ -4,6 +4,8 @@ O Lagrange é um assistente de IA para Windows que trabalha nos seus projetos us
 
 Você usa pela janela do app, pelo terminal ou dentro do VS Code, e as três formas compartilham o mesmo projeto, as mesmas conversas e a mesma memória. O assistente roda na sua máquina; só o modelo fica na nuvem do provedor.
 
+O suporte a macOS, com janela nativa e Seatbelt offline, está em validação; o controle visual de aplicativos continua só no Windows.
+
 Este repositório guarda só o instalador e as versões publicadas. O código-fonte é privado.
 
 ![O Lagrange corrigindo um bug: o pedido, a causa encontrada, o arquivo editado e um subagente revisando os testes](docs/conversa.png)
@@ -41,6 +43,21 @@ As imagens são de um projeto de demonstração e são geradas a cada versão, a
 - **Modo plano e imagens** por conversa, **esforço de raciocínio** para todos os projetos (escolhido embaixo da caixa de mensagem), e avisos na área de trabalho quando algo pede a sua atenção com o app em segundo plano.
 
 ## Instalar
+
+### macOS (em validação)
+
+Requer macOS 13+, Apple Silicon ou Intel, Node.js 22+ com npm e `uv` (com Homebrew: `brew install node uv`). No Terminal:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/rafa210587/lagrange/main/install.sh -o /tmp/lagrange-install.sh
+bash /tmp/lagrange-install.sh
+```
+
+Abra `~/Applications/Lagrange.app`. O comando fica em `~/.local/bin/lagrange`; adicione essa pasta ao PATH se necessário. Estado e versões ficam em `~/Library/Application Support/HarnessAI`. A janela é nativa; credenciais usam o Keychain. A assinatura é local, sem notarização Apple; a aceitação interativa ainda está pendente. Para atualizar, encerre os workspaces pelo app, execute o instalador e reabra.
+
+O shell do agente usa Seatbelt, sem rede, somente após passar nos testes de isolamento ao abrir o projeto. Não requer Claude Code ou conta Anthropic. O shell do host autorizado, o modo de acesso total e aplicativos externos não ficam dentro dessa proteção. A validação real em macOS ainda está pendente.
+
+### Windows
 
 **[Baixe o LagrangeSetup.exe](https://github.com/rafa210587/lagrange/releases/latest/download/LagrangeSetup.exe)**, abra, escolha o que instalar e clique em **Instalar**.
 
@@ -116,6 +133,21 @@ Digite `/` dentro da conversa para ver os comandos (`/modelo`, `/plano`, `/revis
 
 Abra uma pasta confiável e clique no ícone **ℒ** na barra lateral (ou **Ctrl+Alt+L**). O painel conversa sobre essa pasta; use o chip do arquivo aberto e da seleção para dar contexto. A extensão usa o modelo e a chave configurados no app.
 
+### 5. Guias
+
+- [Primeiros passos](docs/primeiros-passos.md): projeto, chave e primeira conversa
+- [Permissões e aprovações](docs/permissoes.md): os três modos, o shell confinado, a internet por projeto e as regras "sempre"
+- [Worktrees, revisão, integração e desfazer](docs/worktrees.md)
+- [Subagentes e workflows](docs/subagentes-e-workflows.md)
+- [Automações agendadas](docs/automacoes.md)
+- [Memória e skills](docs/memoria-e-skills.md)
+- [Servidores MCP por projeto](docs/mcp.md)
+- [Aplicativos](docs/aplicativos.md): navegador, Blender, Unity, Aseprite e o controle de aplicativos
+- [Custo e limite de custo](docs/custo.md)
+- [Terminal e VS Code](docs/terminal-e-vscode.md): todos os comandos e os comandos de barra
+- [Solução de problemas](docs/solucao-de-problemas.md): logs, atualização adiada, processos abertos, chave inválida, proxy
+- [Atalhos de teclado](docs/atalhos.md)
+
 ## Requisitos no Windows
 
 - Windows 11, 64 bits (x64). O Windows 10 deve funcionar, mas ainda não foi validado.
@@ -132,28 +164,29 @@ Abra uma pasta confiável e clique no ícone **ℒ** na barra lateral (ou **Ctrl
 2. Instala o **Python 3.12** pelo uv, também só para a sua conta (na pasta do uv, `%APPDATA%\uv\python`).
 3. Baixa a última versão do Lagrange desta página de Releases e confere o SHA-256 publicado ao lado dela (isso detecta um download corrompido, não substitui uma assinatura).
 4. Instala o **Microsoft Edge WebView2 Runtime** se ele faltar (já vem no Windows 11).
-5. Conforme a sua escolha: cria o atalho no Menu Iniciar, põe o comando `lagrange` no PATH da sua conta (com o **Terminal**) e instala a extensão no VS Code. O pacote da extensão fica também em `%LOCALAPPDATA%\HarnessAI\bin\lagrange.vsix`.
+5. Conforme a sua escolha: cria o atalho no Menu Iniciar; com o **Terminal**, põe no PATH da sua conta o comando `lagrange` e o Node.js e o uv baixados; e instala a extensão no VS Code. O pacote da extensão fica também em `%LOCALAPPDATA%\HarnessAI\bin\lagrange.vsix`.
 
 A instalação só baixa arquivos; nenhum dado seu é enviado. Se algo falhar, o registro completo fica em `%TEMP%\lagrange-setup.log`.
 
 ## Atualizar no Windows
 
-Antes, feche cada projeto aberto em **Arquivo → Fechar projeto**. Fechar a janela não basta: o projeto continua ligado em segundo plano por até 30 minutos. Depois rode o instalador de novo. A versão nova fica ao lado da anterior; projetos, conversas, chaves e configurações são mantidos. Se uma conversa estiver respondendo, a versão anterior só fecha quando ela terminar.
+Com o app aberto, o Lagrange procura uma versão nova uma vez a cada 12 horas. Quando há uma, aparece um aviso acima da conversa:
+
+- **Atualizar agora** baixa o instalador da nova versão, confere o SHA-256 publicado e o executa com as mesmas partes que você tem. O instalador fecha os projetos abertos, espera as respostas em andamento terminarem, instala e reabre o app.
+- **O que mudou** abre a página da versão no navegador.
+- **Depois** deixa essa versão de lado; uma mais nova volta a aparecer.
+
+Só sai versão nova quando o programa muda: mudanças só na documentação não geram aviso. Para não procurar, desligue **Configurações → Geral → Procurar atualizações**.
+
+Também dá para atualizar à mão: feche cada projeto aberto em **Arquivo → Fechar projeto** (fechar a janela não basta, o projeto continua ligado em segundo plano por até 30 minutos) e rode o instalador de novo. Nos dois casos, a versão nova fica ao lado da anterior e projetos, conversas, chaves e configurações são mantidos. Se algum projeto ainda estiver ligado, o instalador mantém a versão atual e diz o que falta encerrar.
 
 ## Desinstalar no Windows
 
-**Desinstalador implementado, ainda não publicado.** Nas versões que o incluírem, a remoção estará em **Configurações → Aplicativos → Aplicativos instalados → Lagrange → Desinstalar**, preservando conversas, chaves, configurações, projetos e worktrees. Runtimes, cache e a extensão do VS Code também são mantidos. Tarefas em andamento são aguardadas por até 20 minutos; workspaces ou comandos ainda abertos e recuperação pendente bloqueiam a remoção. Não há opção de apagar dados.
+Depois de instalar uma versão com desinstalador, abra **Configurações → Aplicativos → Aplicativos instalados → Lagrange → Desinstalar**, ou `%LOCALAPPDATA%\HarnessAI\uninstall\LagrangeUninstall.exe`.
 
-A versão publicada ainda não contém esse desinstalador. Para remover tudo manualmente, feche cada projeto em **Arquivo → Fechar projeto** e:
+O desinstalador aguarda tarefas por até 20 minutos e remove o aplicativo, seus atalhos e o comando do terminal. Conversas, chaves, configurações, projetos, worktrees, runtimes e cache são preservados; não há opção de apagar dados. Se um workspace ou comando ainda estiver aberto, encerre-o pelo app e tente novamente. Registros de encerramento não confirmado exigem a recuperação indicada pelo instalador.
 
-1. Apague as pastas `%LOCALAPPDATA%\HarnessAI` e `%LOCALAPPDATA%\HarnessAI-Workspaces`. A segunda guarda os projetos criados pelo app, as conversas pessoais e as worktrees das conversas. Isso apaga também conversas, chaves e configurações.
-2. Apague o atalho **Lagrange** no Menu Iniciar (e na barra de tarefas ou na área de trabalho, se você o fixou).
-3. Em **Configurações → Sistema → Sobre → Configurações avançadas do sistema → Variáveis de ambiente**, remova da variável **Path** do usuário as entradas que apontam para `%LOCALAPPDATA%\HarnessAI`.
-4. Se instalou a extensão: no VS Code, **Extensões → Lagrange → Desinstalar**.
-5. Opcional: `%APPDATA%\uv\python` guarda o Python 3.12 instalado pelo uv; apague se nada mais seu usa o uv. `%USERPROFILE%\.local\share\opencode` e `%USERPROFILE%\.cache\opencode` guardam dados do motor; apague se você não usa o OpenCode por conta própria.
-6. O sandbox do shell cria perfis de AppContainer `Lagrange.Shell.*` (em `%LOCALAPPDATA%\Packages`) e regras de firewall com nome começando por "Lagrange". Podem ser apagados; não fazem nada sem o app.
-
-Dentro dos seus projetos, o app pode ter deixado: a pasta `.lagrange-artifacts/` (e uma linha em `.git/info/exclude`), worktrees e branches criadas pelas conversas (`git worktree list`), permissões de leitura dadas ao sandbox na pasta do projeto e, em projetos Unity, `Assets/HarnessAI/` e o pacote `com.coplaydev.unity-mcp` em `Packages/manifest.json`.
+A extensão permanece no VS Code: remova-a em **Extensões → Lagrange → Desinstalar**. Versões anteriores precisam ser atualizadas para obter o desinstalador.
 
 ## Onde já foi validado
 
@@ -169,30 +202,23 @@ Dentro dos seus projetos, o app pode ter deixado: a pasta `.lagrange-artifacts/`
 
 Encontrou um problema? Abra uma [issue](https://github.com/rafa210587/lagrange/issues) com o arquivo `%TEMP%\lagrange-setup.log` (instalação) ou os arquivos de `%LOCALAPPDATA%\HarnessAI\logs` (uso).
 
-## Problemas conhecidos desta versão
-
-Corrigidos no código, entram na próxima versão publicada:
-
-- Se o nome da sua pasta de usuário tem acento (por exemplo, `C:\Users\João`), o comando `lagrange` no terminal não funciona. O app e a extensão do VS Code funcionam.
-- O instalador sempre põe o Node.js e o uv baixados no PATH da sua conta, mesmo sem a parte **Terminal**, e regrava o PATH do usuário com as variáveis já expandidas: uma entrada como `%JAVA_HOME%\bin` passa a ser um caminho fixo. Se você usa variáveis no seu PATH, anote-o antes de instalar.
-- Quando a instalação falha, a janela do instalador só mostra o código de saída; o motivo está em `%TEMP%\lagrange-setup.log`.
-
 ## Privacidade
 
-O Lagrange não tem telemetria: não envia uso, erros nem estatísticas para ninguém, e não procura atualizações sozinho. Conversas, memória, chaves e configurações ficam na sua máquina, nas pastas citadas em [Desinstalar](#desinstalar-no-windows).
+O Lagrange não tem telemetria: não envia uso, erros nem estatísticas para ninguém. Conversas, memória, chaves e configurações ficam na sua máquina, nas pastas citadas em [Desinstalar](#desinstalar-no-windows).
 
 O que sai dela:
 
 - para o provedor do modelo que você escolheu: o que você escreve e o que o assistente lê para responder;
 - a cotação do dólar no Banco Central (PTAX), para mostrar custos em reais;
+- uma consulta, a cada 12 horas, à última versão publicada neste repositório (`api.github.com`), que pode ser desligada em **Configurações → Geral**; e, quando você clica em **Atualizar agora**, o download do instalador;
 - quando você usa a função correspondente: as páginas que o navegador abre; a busca na web e a busca de imagens, que enviam o termo buscado ao serviço de busca; os servidores MCP que você conectou; as consultas ao registro de MCP, ao npm e ao PyPI ao propor um MCP novo; e o download, do GitHub, das integrações com Unity e com o controle de aplicativos, na primeira preparação.
 
 ## Limitações conhecidas
 
-- Só Windows x64 (validado no Windows 11); não há versão para macOS nem Linux.
+- Windows x64 é a plataforma validada (no Windows 11). O macOS está em validação; não há versão para Linux.
 - O controle visual (ver a tela, clicar, digitar) foi validado no navegador, no Blender e no Unity preparados pelo app.
 - Entre os provedores, só o DeepSeek foi validado em uso real.
-- A versão publicada ainda não tem desinstalador nem assinatura digital.
+- O instalador e o desinstalador ainda não têm assinatura digital.
 - Cada projeto aberto mantém o seu próprio motor na memória.
 - Erros do provedor (chave inválida, limite de uso) aparecem com a mensagem original dele, em inglês.
 
