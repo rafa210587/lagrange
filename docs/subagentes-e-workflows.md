@@ -59,6 +59,8 @@ As instruções não dão acesso a nada: arquivos, shell e aplicativos seguem as
 
 Com **Assinaturas** ligado no topo da conversa, os subagentes rodam no seu Claude Code ou Codex, na sua assinatura. A conversa só coordena.
 
+No Windows, instalar ou atualizar o Lagrange prepara e verifica versões compatíveis dos dois CLIs automaticamente. Para conectar sua conta, abra **Modelos → Assinaturas → Entrar** e conclua o login do próprio serviço no terminal. O Lagrange não lê nem digita suas credenciais.
+
 Um subagente que edita trabalha numa **Linha de trabalho**: uma worktree que só você integra ou descarta. O cartão da linha, no painel do subagente, mostra o estado (Pronta, Um worker está editando, Retida, Integrada ao projeto, Descartada) e os botões:
 
 - **Revisar**: mostra o diff.
